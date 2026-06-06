@@ -32,22 +32,29 @@ To run RoboTutor on your own machine, you will need Python installed.
 
 ### Step 1: Clone the Repository
 Download this repository to your local machine and navigate into the project folder using your terminal or command prompt:
-
-git clone [https://github.com/JiaKwang05/RoboTutor.git](https://github.com/JiaKwang05/RoboTutor_Project.git)
+```bash
+git clone [https://github.com/JiaKwang05/RoboTutor](https://github.com/JiaKwang05/RoboTutor)
+```
 
 Step 2: Install Dependencies
 RoboTutor relies on the Streamlit framework for its interactive web interface. Install it using pip:
 
+```bash
 pip install streamlit
+```
 (Tip: If you have a requirements.txt file, you can run pip install -r requirements.txt)
 
 Step 3: Launch the Expert System
 Start the local web server by running the following command in your terminal:
-
+```bash
 streamlit run robotutor.py
+```
 Windows Troubleshooting: If your terminal says streamlit is not recognized, your Python Scripts folder might not be in your System PATH. You can bypass this by running the module directly through Python:
 
+```bash
 python -m streamlit run robotutor.py
+```
+
 Once running, a new tab will automatically open in your default web browser containing the RoboTutor application!
 
 ## 📁 Repository Structure
