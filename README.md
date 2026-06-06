@@ -32,28 +32,25 @@ To run RoboTutor on your own machine, you will need Python installed.
 
 ### Step 1: Clone the Repository
 Download this repository to your local machine and navigate into the project folder using your terminal or command prompt:
-```bash
-git clone [https://github.com/YOUR_USERNAME/RoboTutor_Project.git](https://github.com/YOUR_USERNAME/RoboTutor_Project.git)
-cd RoboTutor_Project
+
+git clone [https://github.com/JiaKwang05/RoboTutor.git](https://github.com/JiaKwang05/RoboTutor_Project.git)
+
 Step 2: Install Dependencies
 RoboTutor relies on the Streamlit framework for its interactive web interface. Install it using pip:
 
-Bash
 pip install streamlit
 (Tip: If you have a requirements.txt file, you can run pip install -r requirements.txt)
 
 Step 3: Launch the Expert System
 Start the local web server by running the following command in your terminal:
 
-Bash
 streamlit run robotutor.py
 Windows Troubleshooting: If your terminal says streamlit is not recognized, your Python Scripts folder might not be in your System PATH. You can bypass this by running the module directly through Python:
 
-Bash
 python -m streamlit run robotutor.py
 Once running, a new tab will automatically open in your default web browser containing the RoboTutor application!
 
-📁 Repository Structure
+## 📁 Repository Structure
 robotutor.py — The core Inference Engine and Streamlit User Interface.
 
 kb.json — The Knowledge Base containing the physical-logical bug production rules.
@@ -62,7 +59,7 @@ README.md — Project documentation.
 
 requirements.txt — Python dependencies (Streamlit).
 
-🔮 Future Enhancements
+## 🔮 Future Enhancements
 As outlined in our project proposal, future iterations of RoboTutor aim to include:
 
 Support for advanced components (Ultrasonic sensors, Bluetooth modules, IoT).
