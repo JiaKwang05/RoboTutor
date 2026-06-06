@@ -33,7 +33,7 @@ To run RoboTutor on your own machine, you will need Python installed.
 ### Step 1: Clone the Repository
 Download this repository to your local machine and navigate into the project folder using your terminal or command prompt:
 ```bash
-git clone [https://github.com/JiaKwang05/RoboTutor](https://github.com/JiaKwang05/RoboTutor)
+git clone https://github.com/JiaKwang05/RoboTutor
 ```
 
 Step 2: Install Dependencies
