@@ -1,0 +1,258 @@
+[
+    {
+        "diagnosis": "Fatal Hardware Fault: No Power to Logic Board.",
+        "conditions": {
+            "power_led": "OFF"
+        },
+        "base_certainty": 0.99,
+        "explanation": "If the main power LED is completely off, the microcontroller is receiving 0 volts. No software or sensors can be evaluated until baseline power is restored. Check the main battery connection."
+    },
+    {
+        "diagnosis": "Hardware Fault: Low Battery / Voltage Drop.",
+        "conditions": {
+            "power_led": "DIM",
+            "physical_movement": "JITTERY_OR_WEAK"
+        },
+        "base_certainty": 0.90,
+        "explanation": "A dim LED combined with weak or jittery motor movement indicates the battery has enough voltage to turn on the logic board, but the voltage drops below operational thresholds when the motors attempt to draw power."
+    },
+    {
+        "diagnosis": "Hardware Fault: Battery Critically Low.",
+        "conditions": {
+            "power_led": "DIM",
+            "physical_movement": "STOPPED"
+        },
+        "base_certainty": 0.90,
+        "explanation": "A dim LED and completely stopped motors indicate the battery is nearly dead. It has enough power to barely light the LED, but not enough to drive any physical components."
+    },
+    {
+        "diagnosis": "Hardware Warning: Low Power Detected.",
+        "conditions": {
+            "power_led": "DIM"
+        },
+        "base_certainty": 0.85,
+        "explanation": "The power LED is dim, indicating low battery. Even if some parts seem to work, you should charge or replace the battery before debugging further to avoid unpredictable behavior."
+    },
+    {
+        "diagnosis": "Software Bug: Syntax or Library Error.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SYNTAX_ERROR"
+        },
+        "base_certainty": 0.95,
+        "explanation": "The hardware has perfect power, but the IDE refused to upload the code. This is purely a software syntax issue (e.g., missing semicolons, uninstalled libraries, or misspelled variable names)."
+    },
+    {
+        "diagnosis": "Logical Error: Incorrect Motor Pin Assignment.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "FORWARD",
+            "physical_movement": "STOPPED"
+        },
+        "base_certainty": 0.90,
+        "explanation": "The software is successfully compiling and attempting to send power commands, but the physical motor is not receiving it. Verify that your physical wiring exactly matches the pin numbers declared in your code."
+    },
+    {
+        "diagnosis": "Hardware-Logic Mismatch: Right Motor Polarity Reversed.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "FORWARD",
+            "physical_movement": "SPINNING_RIGHT"
+        },
+        "base_certainty": 0.95,
+        "explanation": "The code commanded both motors to move forward, but the robot is spinning to the right. This means the left motor is moving forward while the right motor is driving in reverse. Check the positive and negative wires on the right motor."
+    },
+    {
+        "diagnosis": "Hardware-Logic Mismatch: Left Motor Polarity Reversed.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "FORWARD",
+            "physical_movement": "SPINNING_LEFT"
+        },
+        "base_certainty": 0.95,
+        "explanation": "The code commanded both motors to move forward, but the robot is spinning to the left. This means the right motor is moving forward while the left motor is driving in reverse. Check the positive and negative wires on the left motor."
+    },
+    {
+        "diagnosis": "Hardware Fault: Loose Motor Wiring or Motor Driver Issue.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "FORWARD",
+            "physical_movement": "JITTERY_OR_WEAK"
+        },
+        "base_certainty": 0.85,
+        "explanation": "Power is good, code is running, but movement is weak. This suggests a poor electrical connection to the motors, or the motor driver is overheating/failing to deliver enough current."
+    },
+    {
+        "diagnosis": "Hardware-Logic Mismatch: Right Motor Polarity Reversed (Backward Command).",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "BACKWARD",
+            "physical_movement": "SPINNING_LEFT"
+        },
+        "base_certainty": 0.95,
+        "explanation": "When commanded backward, a spin to the left means the left motor is moving backward correctly while the right motor is moving forward. Thus, the right motor's polarity is reversed."
+    },
+    {
+        "diagnosis": "Hardware-Logic Mismatch: Left Motor Polarity Reversed (Backward Command).",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "BACKWARD",
+            "physical_movement": "SPINNING_RIGHT"
+        },
+        "base_certainty": 0.95,
+        "explanation": "When commanded backward, a spin to the right means the right motor is moving backward correctly while the left motor is moving forward. Thus, the left motor's polarity is reversed."
+    },
+    {
+        "diagnosis": "Hardware-Logic Mismatch: Both Motors Polarity Reversed (Backward Command).",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "BACKWARD",
+            "physical_movement": "FORWARD"
+        },
+        "base_certainty": 0.95,
+        "explanation": "You commanded backward, but it went forward. Both motors have their positive and negative wires swapped."
+    },
+    {
+        "diagnosis": "Logical Error: Incorrect Motor Pin Assignment (Backward Command).",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "BACKWARD",
+            "physical_movement": "STOPPED"
+        },
+        "base_certainty": 0.90,
+        "explanation": "The robot isn't moving backward as commanded. Verify that the backward pin assignments in your code match the physical wiring."
+    },
+    {
+        "diagnosis": "Hardware Fault: Floating Pins or Short Circuit.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "STOP",
+            "physical_movement": "FORWARD"
+        },
+        "base_certainty": 0.85,
+        "explanation": "The code commands the motors to stop, but they are moving forward. This indicates the motor pins might be 'floating' (unconnected or improperly defined as inputs instead of outputs), or there's a hardware short on the motor driver."
+    },
+    {
+        "diagnosis": "Hardware Fault: Floating Pins or Short Circuit (Spinning).",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "STOP",
+            "physical_movement": "SPINNING_RIGHT"
+        },
+        "base_certainty": 0.85,
+        "explanation": "The code commands the motors to stop, but the robot is spinning. One of the motor pins might be 'floating' or shorted high."
+    },
+    {
+        "diagnosis": "Hardware Fault: Floating Pins or Short Circuit (Spinning).",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "STOP",
+            "physical_movement": "SPINNING_LEFT"
+        },
+        "base_certainty": 0.85,
+        "explanation": "The code commands the motors to stop, but the robot is spinning. One of the motor pins might be 'floating' or shorted high."
+    },
+    {
+        "diagnosis": "Hardware Fault: PWM Noise or Loose Wiring.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "STOP",
+            "physical_movement": "JITTERY_OR_WEAK"
+        },
+        "base_certainty": 0.80,
+        "explanation": "The code commands stop, but the motors jitter. This suggests electrical noise is reaching the motor driver, or the ground connection between the logic board and motor driver is loose."
+    },
+    {
+        "diagnosis": "Logical Error: Sensor Deadlock (Missing Delay).",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "FORWARD",
+            "physical_movement": "FORWARD",
+            "serial_monitor": "FROZEN_OR_CRASHING"
+        },
+        "base_certainty": 0.85,
+        "explanation": "The hardware and baseline code are functioning perfectly. However, a frozen serial monitor indicates a sensor is flooding the logic board. Without a software delay() function, the processor becomes deadlocked."
+    },
+    {
+        "diagnosis": "Logical Error: Serial.begin() Missing or Baud Rate Mismatch.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "FORWARD",
+            "physical_movement": "FORWARD",
+            "serial_monitor": "NO_OUTPUT"
+        },
+        "base_certainty": 0.90,
+        "explanation": "Everything is working physically, but there is no serial output. You likely forgot to call Serial.begin() in your setup(), or the baud rate in your code doesn't match the Serial Monitor window."
+    },
+    {
+        "diagnosis": "System Operating Normally! No Bug Detected.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "FORWARD",
+            "physical_movement": "FORWARD",
+            "serial_monitor": "PRINTING_NORMALLY"
+        },
+        "base_certainty": 0.99,
+        "explanation": "All physical and logical indicators point to a perfectly functioning robot! If you are still experiencing issues, it might be related to environmental factors or advanced logic not covered in this basic diagnostic."
+    },
+    {
+        "diagnosis": "System Operating Normally! No Bug Detected.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "STOP",
+            "physical_movement": "STOPPED",
+            "serial_monitor": "PRINTING_NORMALLY"
+        },
+        "base_certainty": 0.99,
+        "explanation": "The robot correctly stays still when commanded to stop and the serial monitor is functioning normally. The hardware and basic logic are perfectly fine."
+    },
+    {
+        "diagnosis": "Logical Error: Serial Debugging Issue.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "STOP",
+            "physical_movement": "STOPPED",
+            "serial_monitor": "NO_OUTPUT"
+        },
+        "base_certainty": 0.85,
+        "explanation": "The robot is physically fine, but there is no serial output. Check your Serial.begin() baud rate, or ensure your print statements are being reached."
+    },
+    {
+        "diagnosis": "Logical Error: Serial Overload.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS",
+            "motor_commanded": "STOP",
+            "physical_movement": "STOPPED",
+            "serial_monitor": "FROZEN_OR_CRASHING"
+        },
+        "base_certainty": 0.85,
+        "explanation": "The hardware is fine, but the serial monitor is crashing. You might be printing data in an infinite loop without a delay()."
+    },
+    {
+        "diagnosis": "Unaccounted Edge Case.",
+        "conditions": {
+            "power_led": "BRIGHT",
+            "compilation_status": "SUCCESS_NO_ERRORS"
+        },
+        "base_certainty": 0.50,
+        "explanation": "The code compiled and there is power, but the specific combination of motor and movement symptoms does not exactly match common logical errors. Double-check your logic board wiring and sensor inputs."
+    }
+]
